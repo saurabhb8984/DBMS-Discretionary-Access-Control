@@ -1,0 +1,180 @@
+<body>
+<h3>Saurabh Botre</h3>
+<h4>1001409374</h4>
+ <div class="container">
+	<table border="5px">
+		<th>IDNo</th>
+		<th>Initial</th>
+		<th>Last Name</th>
+		<th>Role</th>
+    {% for rows in user_list  %}
+        <tr>
+            <td>
+                {{rows[0]}}
+            </td>
+			<td>
+                {{rows[1]}}
+            </td>
+			<td>
+                {{rows[2]}}
+            </td>
+			<td>
+                {{rows[3]}}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+   <h1>Add User Account</h1>
+   <form id="user_account" action="/addUserAccount" method="POST">
+	  IdNo: <input type="text" name="idNo" placeholder="Enter Number"><br><br>
+	  Password: <input type="text" name="password" placeholder="Enter Number"><br><br>
+	  Initial: <input type="text" name="initial" placeholder="Enter Initial"><br><br>
+	  Last Name: <input type="text" name="lastName" placeholder="Enter Last Name"><br><br>
+	  Phone: <input type="text" name="phone" placeholder="(XXX-XXX-XXXX)"><br><br>
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addUserAccount" value="Add">
+   </form>
+   <hr>
+   <h1>Add Role</h1>
+   <form id="addRole" action="/addRole" method="POST">
+	  RoleName: <input type="text" name="roleName" placeholder="Enter role name"><br><br>
+	  Description: <input type="text" name="description" placeholder="Enter description"><br><br>
+     <input type="submit" name="description" value="Add">
+   </form>
+   <hr>
+   <h1>Add Table</h1>
+   <form id="addTable" action="/addTable" method="POST">
+	  Table Name: <input type="text" name="tableName" placeholder="Enter Table Name"><br><br>
+	  DB Name: <input type="text" name="dbName" placeholder="Enter DB Name"><br><br>
+	  <label>Select Id No:</label>
+            <select name="owner_id">
+            {% for y in owner_list %}
+			<option value="{{ y }}"{% if loop.first %} SELECTED {% endif %} > {{ y }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addTable" value="Add">
+   </form>
+   <hr>
+   <h1>Add Privilege</h1>
+   <form id="addPrivilege" action="/addPrivilege" method="POST">
+	  Privilege Name: <input type="text" name="pName" placeholder="Enter string"><br><br>
+	  <label>Select Privilege Type:</label>
+            <select name="ptype">
+            {% for z in p_list %}
+			<option value="{{ z }}"{% if loop.first %} SELECTED {% endif %} > {{ z }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addPrivilege" value="Add">
+   </form>
+   <hr>
+   <h1>Add User Account</h1>
+   <form id="user_role" action="/addUserRole" method="POST">
+	  IdNo: <input type="text" name="idNo" placeholder="Enter Number"><br><br>
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addUserRole" value="Add">
+   </form>
+   <hr>
+   <h1>Relate Account Privilege to Role</h1>
+   <form id="privilege_role" action="/addPrivilegeRole" method="POST">
+	  <label>Select Account Privilege:</label>
+            <select name="accountPrivilege">
+            {% for x in accountPlist %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addUserRole" value="Add">
+   </form>
+   <hr>
+   <h1>Relate Relation Privilege,Role and Table</h1>
+   <form id="PRT" action="/addPrivilegeRoleTable" method="POST">
+	  <label>Select Relation Privilege:</label>
+            <select name="relationPName">
+            {% for x in relationPlist %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <label>Select DB:</label>
+            <select name="dbName">
+            {% for x in dbList %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <label>Select Table:</label>
+            <select name="tableName">
+            {% for x in tableList %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+     <input type="submit" name="addUserRole" value="Add">
+   </form>
+   <hr>
+   <h1>Retrive Privileges</h1>
+   <form id="rPrivileges" action="/retrivePrivileges" method="POST">
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <input type="submit" name="addUserRole" value="Submit">
+   </form>
+   <hr>
+    <h1>Retrive Privileges of User Account</h1>
+   <form id="rPrivilegesUserAccount" action="/rPrivilegesUserAccount" method="POST">
+	  IdNo: <input type="text" name="idNo" placeholder="Enter Number"><br><br>
+	  <input type="submit" name="addUserRole" value="Submit">
+   </form>
+   <hr>
+    <h1>Check if privilege is granted to user account</h1>
+   <form id="checkPrivilegeAccount" action="/checkPrivilegeAccount" method="POST">
+	  IdNo: <input type="text" name="idNo" placeholder="Enter Number"><br><br>
+	  <label>Select Privilege:</label>
+            <select name="PName">
+            {% for x in plist %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <input type="submit" name="addUserRole" value="Submit">
+   </form>
+   <hr>
+   <h1>Revoke Privilege Form Role</h1>
+   <form id="revokePrivilegeRole" action="/revokePrivilegeRole" method="POST">
+	  <label>Select Role:</label>
+            <select name="roleName">
+            {% for x in role_list %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <label>Select Privilege:</label>
+            <select name="PName">
+            {% for x in plist %}
+			<option value="{{ x }}"{% if loop.first %} SELECTED {% endif %} > {{ x }}</option>
+			{% endfor %}
+            </select><br><br>
+	  <input type="submit" name="addUserRole" value="Submit">
+   </form>
+   <hr>
+  </div>
+ </body>
